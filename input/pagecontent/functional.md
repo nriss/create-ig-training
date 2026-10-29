@@ -1,3 +1,3 @@
 ### Functional
 
-Décrire le besoin fonctionnel : cas d'usage, acteurs et modèles logiques.
+Describe the functional need: use cases, actors and logical models.

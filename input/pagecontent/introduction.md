@@ -1,3 +1,3 @@
 ### Introduction
 
-Présenter le contexte de l'IG et la problématique qu'il résout.
+Present the context of the IG and the problem it solves.

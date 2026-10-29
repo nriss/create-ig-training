@@ -1,3 +1,3 @@
 ### About
 
-Auteurs et contributeurs, dépendances, historique des versions et propriété intellectuelle.
+Authors and contributors, dependencies, version history and intellectual property.
