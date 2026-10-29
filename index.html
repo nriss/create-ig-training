@@ -128,7 +128,7 @@ Parent: Patient
 
     <h3>Étape 1 : configurer l'id et le canonical</h3>
     <p>
-      Une fois votre fork créé, ouvrez le fichier <code>sushi-config.yaml</code> et renseignez les deux premières valeurs :
+      Une fois votre fork créé, ouvrez le fichier <code>sushi-config.yaml</code> et renseignez ces deux valeurs :
     </p>
     <ul>
       <li><code>id</code> : l'identifiant de votre guide d'implémentation une fois publié.</li>
@@ -137,6 +137,10 @@ Parent: Patient
     <p>Le seul point important : l'adresse du <code>canonical</code> doit se terminer par <code>/[code]</code>, où <code>[code]</code> est la dernière partie de l'<code>id</code>.</p>
 <pre><code>id: exemple.fhir.monig
 canonical: https://example.org/ig/monig</code></pre>
+    <p>
+      Modifiez aussi le fichier <code>ig.ini</code> : la ligne <code>ig</code> doit pointer vers le fichier de l'IG généré à partir de votre <code>id</code>.
+    </p>
+<pre><code>ig = fsh-generated/resources/ImplementationGuide-exemple.fhir.monig.json</code></pre>
 
     <h2>Partie 3 : Publication d'une version officielle</h2>
     <p>
