@@ -3,7 +3,7 @@
 id: ans.fhir.fr.[code]
 canonical: https://example.org/ig/[code] # the last part of canonical and id must be the same
 name: ExampleIG # Should be an acronym
-title: ANS IG Example
+title: IG Example
 description: Description du projet
 publisher:
   name: Work Group Meeting HL7 Europe Malaga
