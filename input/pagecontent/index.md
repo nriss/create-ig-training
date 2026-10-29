@@ -6,7 +6,7 @@
 {% if site.data.info.releaselabel == 'ci-build' %}
 <div style="width: 65%">
     <blockquote class="stu-note">
-    <p>Cet Implementation Guide n'est pas la version courante, il s'agit de la version en intégration continue soumise à des changements fréquents uniquement destinée à suivre les travaux en cours. La version courante sera accessible via l'URL canonique suite à la première release : http://interop.esante.gouv.fr/ig/fhir/[code - ig]</p>
+    <p>This Implementation Guide is not the current version. It is the continuous integration version, subject to frequent changes and intended only to follow ongoing work. The current version will be available via the canonical URL after the first release: http://interop.esante.gouv.fr/ig/fhir/[code - ig]</p>
     </blockquote>
 </div>
 {% endif %}
@@ -16,47 +16,41 @@
 <div style="width: 65%">
 <blockquote class="stu-note">
 <p>
-  <b>Attention !</b>
+  <b>Warning!</b>
   <br>
- Cet Implementation Guide est actuellement en concertation. La version courante est accessible à l'adresse : http://interop.esante.gouv.fr/ig/fhir/[code - ig]
+ This Implementation Guide is currently open for public comment. The current version is available at: http://interop.esante.gouv.fr/ig/fhir/[code - ig]
 </p>
 </blockquote>
 </div>
 {% endif %}
 
 
-<!--  A décommenter si CI-SIS
+<!--  Uncomment if CI-SIS
 <div class="figure">
-    <img src="ci-sis-logo.png" alt="CI-SIS" title="Logo du CI-SIS" style="width:100%;">
+    <img src="ci-sis-logo.png" alt="CI-SIS" title="CI-SIS logo" style="width:100%;">
 </div>
 -->
 
 ### Introduction
 
-Définir ici de quoi parle l'IG (En termes non expert, compréhensible par un patient). Rajouter également les détails techniques sur le contexte et le besoin de cet IG
+Define here what the IG is about (in non-expert terms, understandable by a patient). Also add the technical details on the context and the need for this IG.
 
-Les principales sections de l'IG  sont :
+The main sections of the IG are:
 
-* Le contexte de l'IG, quelle problématique il résout
-* Ce que les Implémenteurs doivent mettre en place
-* Un onglet "Ressources de conformité" pour s'assurer d'un schéma global entre tous les IGs
+* The context of the IG, and the problem it solves
+* What implementers must put in place
+* A "Conformance resources" tab to ensure a consistent global scheme across all IGs
 
-### Périmètre du projet
+### Project scope
 
-Définir en quelques lignes quel est le périmètre du projet
+Define in a few lines the scope of the project.
 
-Toujours laisser l'onglet "Ressources de conformité" pour s'assurer d'une cohérence globales entre tous les IGs
+Always keep the "Conformance resources" tab to ensure overall consistency across all IGs.
 
-### Auteurs et contributeurs (optionnel)
-
-| Role  | Nom | Organisation | Contact |
-| --- | --- | --- | --- |
-| **Primary Editor** | Prenom Nom | Agence du Numérique en Santé | prenom.nom@address.email |
-
-### Dépendances
+### Dependencies
 
 {% lang-fragment dependency-table.xhtml %}
 
-### Propriété intellectuelle
+### Intellectual property
 
 {% lang-fragment ip-statements.xhtml %}
