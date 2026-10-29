@@ -2,7 +2,7 @@ name: Publier sur gh-pages
 
 on:
   push:
-    branches: [main]
+    branches: [site]
 
 permissions:
   contents: write
