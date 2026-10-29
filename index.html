@@ -81,6 +81,28 @@
       <li>Générer l'IG en local et le publier sur GitHub Pages.</li>
     </ul>
 
+    <h2>1/ Qu'est-ce qu'un guide d'implémentation ?</h2>
+    <p>Un guide d'implémentation (IG) explique comment utiliser FHIR pour un besoin précis. Il contient deux choses :</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Des ressources techniques</h3>
+        <p>Profils, extensions, jeux de valeurs, exemples… Ils permettent de valider automatiquement la conformité des ressources échangées.</p>
+      </div>
+      <div class="card">
+        <h3>Une partie narrative</h3>
+        <p>Des pages qui expliquent comment utiliser les profils définis : contexte, cas d'usage, règles de mise en œuvre.</p>
+      </div>
+    </div>
+
+    <h3>Qu'est-ce que FSH ?</h3>
+    <p>
+      FHIR Shorthand (FSH) est un langage textuel qui permet d'écrire les ressources techniques d'un IG de façon concise, plutôt que d'éditer à la main de longs fichiers JSON ou XML.
+      L'outil <a href="https://github.com/FHIR/sushi">SUSHI</a> compile ensuite le FSH en ressources FHIR.
+    </p>
+<pre><code>Profile: TrainingPatient
+Parent: Patient
+* birthDate 1..1</code></pre>
+
     <h2>Déroulé (60 min)</h2>
     <ol class="timeline">
       <li>
