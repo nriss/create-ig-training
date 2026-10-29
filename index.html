@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training : créer un IG FHIR</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1f2933;
+      --muted: #5b6770;
+      --accent: #0077be;
+      --card: #f5f7f9;
+      --border: #d9e0e6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14181c;
+        --fg: #e6ebef;
+        --muted: #9aa7b2;
+        --accent: #5cb3e6;
+        --card: #1d2329;
+        --border: #2d363e;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 16px; }
+    h1 { font-size: 2rem; margin: 0 0 8px; }
+    h2 { margin-top: 40px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .lead { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+    a { color: var(--accent); }
+    code { background: var(--card); padding: 1px 6px; border-radius: 4px; }
+    pre {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      overflow-x: auto;
+    }
+    pre code { padding: 0; background: none; }
+    .timeline { list-style: none; padding: 0; margin: 0; }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline .time { font-weight: 600; color: var(--accent); white-space: nowrap; }
+    .timeline h3 { margin: 0 0 2px; font-size: 1.05rem; }
+    .timeline p { margin: 0; color: var(--muted); }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    @media (max-width: 480px) {
+      .timeline li { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Training : créer un IG FHIR</h1>
+    <p class="lead">Session d'1 heure : construire un implementation guide de A à Z avec quelques artifacts FHIR (profil, extension, jeu de valeurs, exemple).</p>
+
+    <h2>Objectifs</h2>
+    <ul>
+      <li>Comprendre la structure d'un IG et le rôle de SUSHI et de l'IG Publisher.</li>
+      <li>Écrire en FSH un petit jeu d'artifacts FHIR.</li>
+      <li>Générer l'IG en local et le publier sur GitHub Pages.</li>
+    </ul>
+
+    <h2>Déroulé (60 min)</h2>
+    <ol class="timeline">
+      <li>
+        <span class="time">0 – 10 min</span>
+        <div>
+          <h3>Panorama d'un IG</h3>
+          <p>FHIR, IG, FSH, SUSHI, IG Publisher : qui fait quoi. Structure d'un projet à partir de <a href="https://github.com/ansforge/IG-modele">ansforge/IG-modele</a>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="time">10 – 20 min</span>
+        <div>
+          <h3>Mise en place</h3>
+          <p>Cloner le modèle, renseigner <code>sushi-config.yaml</code> (identité, dépendances, pages, menu) et <code>ig.ini</code>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="time">20 – 40 min</span>
+        <div>
+          <h3>Écrire les artifacts en FSH</h3>
+          <p>Un <code>Profile</code> (contraintes sur une ressource), une <code>Extension</code>, un <code>ValueSet</code> avec son <code>CodeSystem</code>, et une <code>Instance</code> d'exemple.</p>
+        </div>
+      </li>
+      <li>
+        <span class="time">40 – 50 min</span>
+        <div>
+          <h3>Pages et génération</h3>
+          <p>Rédiger une page Markdown (à partir du niveau <code>###</code>), lancer <code>sushi .</code>, puis <code>_genonce</code> et lire le QA.</p>
+        </div>
+      </li>
+      <li>
+        <span class="time">50 – 60 min</span>
+        <div>
+          <h3>Publication et questions</h3>
+          <p>Publier sur GitHub Pages, bonnes pratiques, pistes pour aller plus loin.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h2>Prérequis</h2>
+    <ul>
+      <li>Git, Node.js (pour SUSHI), Java (pour l'IG Publisher).</li>
+      <li>Un éditeur de texte, idéalement avec l'extension FSH.</li>
+    </ul>
+<pre><code>npm install -g fsh-sushi
+git clone https://github.com/ansforge/IG-modele
+cd IG-modele
+sushi .</code></pre>
+
+    <h2>Exemple fil rouge en FSH</h2>
+<pre><code>Profile: TrainingPatient
+Parent: Patient
+Title: "Patient (training)"
+* identifier 1..*
+* birthDate 1..1
+* extension contains TrainingNationality named nationality 0..1
+
+Extension: TrainingNationality
+Title: "Nationalité"
+* value[x] only CodeableConcept
+* valueCodeableConcept from TrainingCountryVS (extensible)
+
+ValueSet: TrainingCountryVS
+Title: "Pays (training)"
+* include codes from system TrainingCountryCS
+
+CodeSystem: TrainingCountryCS
+Title: "Pays (training)"
+* #FR "France"
+* #BE "Belgique"
+
+Instance: TrainingPatientExample
+InstanceOf: TrainingPatient
+Usage: #example
+* identifier.value = "123"
+* birthDate = "1980-01-01"</code></pre>
+
+    <h2>Ressources</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><a href="https://build.fhir.org/ig/HL7/fhir-shorthand">FHIR Shorthand</a></h3>
+        <p>Grammaire et référence du langage FSH.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/FHIR/sushi">SUSHI</a></h3>
+        <p>Compilateur FSH vers ressources FHIR.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/HL7/fhir-ig-publisher">IG Publisher</a></h3>
+        <p>Génération du site de l'implementation guide.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://build.fhir.org/ig/FHIR/ig-guidance">IG guidance</a></h3>
+        <p>Bonnes pratiques de rédaction d'un IG.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/ansforge/interop-IG-style">interop-IG-style</a></h3>
+        <p>Style ANS (logos, CSS) à intégrer dans l'IG.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
