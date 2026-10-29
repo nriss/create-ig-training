@@ -126,6 +126,18 @@ Parent: Patient
       <a href="https://hl7.eu/fhir/base/">profils européens</a> et seront conformes à ceux-ci.
     </p>
 
+    <h3>Étape 1 : configurer l'id et le canonical</h3>
+    <p>
+      Une fois votre fork créé, ouvrez le fichier <code>sushi-config.yaml</code> et renseignez les deux premières valeurs :
+    </p>
+    <ul>
+      <li><code>id</code> : l'identifiant de votre guide d'implémentation une fois publié.</li>
+      <li><code>canonical</code> : l'adresse de publication de l'IG. Inventez une adresse.</li>
+    </ul>
+    <p>Le seul point important : l'adresse du <code>canonical</code> doit se terminer par <code>/[code]</code>, où <code>[code]</code> est la dernière partie de l'<code>id</code>.</p>
+<pre><code>id: exemple.fhir.monig
+canonical: https://example.org/ig/monig</code></pre>
+
     <h2>Ressources</h2>
     <div class="grid">
       <div class="card">
