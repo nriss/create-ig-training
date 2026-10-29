@@ -55,6 +55,15 @@
     .timeline .time { font-weight: 600; color: var(--accent); white-space: nowrap; }
     .timeline h3 { margin: 0 0 2px; font-size: 1.05rem; }
     .timeline p { margin: 0; color: var(--muted); }
+    .note {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin: 16px 0;
+    }
+    .note p { margin: 4px 0; }
     .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .card {
       background: var(--card);
@@ -155,6 +164,13 @@ canonical: https://example.org/ig/monig</code></pre>
       Votre IG est ensuite disponible à l'adresse <code>https://build.fhir.org/ig/&lt;compte&gt;/&lt;dépôt&gt;/branches/&lt;branche&gt;</code>.
       Les noms de branches ne doivent contenir que des lettres, des chiffres, <code>_</code> et <code>-</code> (pas de <code>/</code>).
     </p>
+
+    <div class="note">
+      <p>
+        <strong>Note :</strong> il est aussi possible de générer l'IG en local avec l'IG Publisher, mais nous ne le verrons pas dans cette session,
+        car cela demande d'installer trop de dépendances : Java, Node.js et SUSHI, Ruby et Jekyll, ainsi que Git.
+      </p>
+    </div>
 
     <h2>Partie 4 : Publication d'une version officielle</h2>
     <p>
