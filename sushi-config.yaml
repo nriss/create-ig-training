@@ -6,8 +6,8 @@ name: ExampleIG # Should be an acronym
 title: ANS IG Example
 description: Description du projet
 publisher:
-  name: Agence du Numérique en Santé (ANS) - 2-10 Rue d'Oradour-sur-Glane, 75015 Paris
-  url: https://esante.gouv.fr
+  name: Work Group Meeting HL7 Europe Malaga
+  url: https://hl7europe.eu/hl7-europe-working-group-meeting-malaga-2026/
 status: draft # draft | active | retired | unknown
 version: 0.1.0 # shall conforms to Semantic Versioning https://fr.wiktionary.org/wiki/SemVer
 fhirVersion: 4.0.1
