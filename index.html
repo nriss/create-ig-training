@@ -142,7 +142,21 @@ canonical: https://example.org/ig/monig</code></pre>
     </p>
 <pre><code>ig = fsh-generated/resources/ImplementationGuide-exemple.fhir.monig.json</code></pre>
 
-    <h2>Partie 3 : Publication d'une version officielle</h2>
+    <h2>Partie 3 : Configurer l'auto-builder</h2>
+    <p>
+      L'<a href="https://github.com/FHIR/auto-ig-builder">auto-builder</a> d'HL7 génère automatiquement votre IG à chaque commit.
+    </p>
+    <ol>
+      <li>Vérifiez que votre fork est un dépôt <strong>public</strong>.</li>
+      <li>Installez l'application GitHub <a href="https://github.com/apps/fhir-ig-builder">FHIR IG Builder</a> sur votre compte ou sur votre dépôt.</li>
+      <li>Faites un commit : la génération se déclenche, et dure 2 à 3 minutes.</li>
+    </ol>
+    <p>
+      Votre IG est ensuite disponible à l'adresse <code>https://build.fhir.org/ig/&lt;compte&gt;/&lt;dépôt&gt;/branches/&lt;branche&gt;</code>.
+      Les noms de branches ne doivent contenir que des lettres, des chiffres, <code>_</code> et <code>-</code> (pas de <code>/</code>).
+    </p>
+
+    <h2>Partie 4 : Publication d'une version officielle</h2>
     <p>
       La version « build » générée par l'autobuild est une version en intégration continue.
       Pour publier une version officielle, il faut utiliser l'option <code>-go-publish</code> de l'IG Publisher, qui n'est pas vue dans cette formation.
