@@ -176,8 +176,16 @@ canonical: https://example.org/ig/monig</code></pre>
     <h2>Partie 4 : Ajout d'artifacts FHIR</h2>
     <p>
       Nous allons maintenant enrichir votre guide d'implémentation avec des artifacts FHIR écrits en FSH dans le dossier <code>input/fsh</code> :
-      des profils qui héritent des <a href="https://hl7.eu/fhir/base/">profils européens</a>, ainsi que les ressources qui leur sont associées.
+      un profil qui hérite des <a href="https://hl7.eu/fhir/base/">profils européens</a>, ainsi que les ressources qui lui sont associées.
+      Pour pouvoir hériter de ces profils, ajoutez d'abord la dépendance <code>hl7.fhir.eu.base</code> dans <code>sushi-config.yaml</code>.
     </p>
+    <p>Vous allez créer 4 ressources :</p>
+    <ol>
+      <li>Un <strong>profil d'Observation</strong> pour indiquer la couleur des yeux.</li>
+      <li>Un <strong>CodeSystem</strong> contenant des couleurs.</li>
+      <li>Un <strong>ValueSet</strong> contenant des couleurs.</li>
+      <li>Une <strong>instance d'exemple</strong> de ce profil.</li>
+    </ol>
 
     <h2>Partie 5 : Publication d'une version officielle</h2>
     <p>
