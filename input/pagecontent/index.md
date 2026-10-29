@@ -6,7 +6,7 @@
 {% if site.data.info.releaselabel == 'ci-build' %}
 <div style="width: 65%">
     <blockquote class="stu-note">
-    <p>This Implementation Guide is not the current version. It is the continuous integration version, subject to frequent changes and intended only to follow ongoing work. The current version will be available via the canonical URL after the first release: http://interop.esante.gouv.fr/ig/fhir/[code - ig]</p>
+    <p>This Implementation Guide is not the current version. It is the continuous integration version, subject to frequent changes and intended only to follow ongoing work. The current version will be available via the canonical URL after the first release: https://example.org/ig/[code - ig]</p>
     </blockquote>
 </div>
 {% endif %}
@@ -18,7 +18,7 @@
 <p>
   <b>Warning!</b>
   <br>
- This Implementation Guide is currently open for public comment. The current version is available at: http://interop.esante.gouv.fr/ig/fhir/[code - ig]
+ This Implementation Guide is currently open for public comment. The current version is available at: https://example.org/ig/[code - ig]
 </p>
 </blockquote>
 </div>
