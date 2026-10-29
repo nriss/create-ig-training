@@ -178,14 +178,14 @@ canonical: https://example.org/ig/monig</code></pre>
       Nous allons maintenant enrichir votre guide d'implémentation avec des artifacts FHIR écrits en FSH dans le dossier <code>input/fsh</code> :
       un profil qui hérite des <a href="https://hl7.eu/fhir/base/">profils européens</a>, ainsi que les ressources qui lui sont associées.
     </p>
-    <h3>Étape 2 : ajouter la dépendance vers HL7 Europe Base and Core</h3>
+    <h3>Étape 1 : ajouter la dépendance vers HL7 Europe Base and Core</h3>
     <p>
       Pour pouvoir hériter des profils européens, ajoutez d'abord la dépendance vers le guide
       <a href="https://hl7.eu/fhir/base/">HL7 Europe Base and Core</a> dans <code>sushi-config.yaml</code> :
     </p>
 <pre><code>dependencies:
   hl7.fhir.eu.base: 2.0.1</code></pre>
-    <h3>Étape 3 : créer les ressources</h3>
+    <h3>Étape 2 : créer les ressources</h3>
     <p>Vous allez créer 4 ressources :</p>
     <ol>
       <li>Un <strong>profil d'Observation</strong> pour indiquer la couleur des yeux.</li>
