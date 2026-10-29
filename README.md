@@ -7,8 +7,9 @@ Template d'Implementation Guide FHIR basé sur [ansforge/IG-modele](https://gith
 1. Forker ce dépôt en **décochant** « Copy the main branch only » pour récupérer la branche `ig-template`.
 2. Cloner votre fork et se placer sur la branche `ig-template`.
 3. Installer [SUSHI](https://github.com/FHIR/sushi) : `npm install -g fsh-sushi`.
-4. Compiler : `sushi .`
-5. Générer l'IG : `./_updatePublisher.sh` puis `./_genonce.sh` (Java requis).
+4. Adapter les placeholders `[code]` dans `sushi-config.yaml` (`id`, `canonical`) et `ig.ini`, ainsi que `name`, `title` et `description`.
+5. Compiler : `sushi .`
+6. Générer l'IG : `./_updatePublisher.sh` puis `./_genonce.sh` (Java requis).
 
 Le résultat est dans `output/index.html`.
 
