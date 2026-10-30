@@ -1,43 +1,23 @@
-[A MODIFIER : remplacer avec votre logo s'il ne s'agit pas d'un projet CI-SIS]
+# Training: create a FHIR Implementation Guide
 
-![Logo_LEF_CI-SIS](https://user-images.githubusercontent.com/48218773/227532484-eff82649-4e42-49c6-966a-dc3ea78cf59c.png)
+Hands-on session (HL7 Europe Working Group Meeting, Málaga 2026) to learn how to create your first FHIR Implementation Guide (IG) with a few artifacts written in FSH: a profile inheriting from the HL7 Europe profiles, a CodeSystem, a ValueSet and an example instance.
 
-[A MODIFIER : adapter au lien du projet]
+**Prerequisite:** a GitHub account. Everything is done on GitHub, no local installation is needed.
 
-[![Workflow Init](https://github.com/ansforge/IG-fhir-partage-de-documents-de-sante/actions/workflows/fhir-workflows.yml/badge.svg)](https://github.com/ansforge/IG-fhir-partage-de-documents-de-sante/actions/workflows/fhir-workflows.yml)
+Training material: <https://nriss.github.io/create-ig-training/>
 
-Cet exemple d'Implementation Guide (IG) très simplifié sert de base pour le développement de nouveaux guides d'implémentation. La démarche d'élaboration d'un nouvel IG est expliquée dans le [wiki de ce repo](https://github.com/ansforge/IG-modele/wiki).
-Le README ci-dessous constitue un template à adapter et compléter pour chaque projet.
+## How to use this template
 
-# Contexte
+1. Fork this repository (it must be **public**).
+2. In `sushi-config.yaml`, set the `id` (`org.fhir.[realm].[code]`) and the `canonical` (an address you make up, ending with `/[code]`). Update the `ig` line of `ig.ini` accordingly.
+3. Install the [FHIR IG Builder](https://github.com/apps/fhir-ig-builder) GitHub app on your fork, then commit: the [auto-builder](https://github.com/FHIR/auto-ig-builder) generates your IG in 2-3 minutes at `https://build.fhir.org/ig/<account>/<repository>/branches/<branch>`. Logs are listed at <https://build.fhir.org/ig/>.
+4. Add the dependency `hl7.fhir.eu.base: 2.0.1` in `sushi-config.yaml`, then write your FSH artifacts in `input/fsh/`.
 
-## Contexte métier du projet
+## Structure
 
-[A COMPLETER : doit contenir la description fonctionnelle du projet destinée à un profil non technique]
+* `sushi-config.yaml`: IG configuration (dependencies, pages, menu).
+* `ig.ini`: IG Publisher configuration (IG resource, template).
+* `input/fsh/`: FSH artifacts (profiles, extensions, ValueSets, CodeSystems, examples).
+* `input/pagecontent/`: IG pages in Markdown (start at heading level `###`).
 
-## Contexte technique du projet
-
-[A COMPLETER : doit expliquer brièvement quelles ressources / profils sont utilisés, exemple implémentation où IG est utilisé]
-
-# CI/CD
-
-Les workflows associés à ce repository (.github/workflows) permettent :
-
-* D'executer Sushi pour vérifier la grammaire
-* De faire les tests avec le validator_cli
-* De publier les pages : https://ansforge.github.io/{nom du repo}/{nom de la branche}/ig
-
-# Notes
-
-Ce repo "IG-modele" a été créé à partir du repo [sample-ig](https://github.com/FHIR/sample-ig) de l'organisation GitHub FHIR.
-
-[A COMPLETER: notes supplémentaires pour le lecteur de la spec]
-Un commentaire ? Une remarque ? Utilisez les GitHub [issues](https://docs.github.com/fr/issues) pour indiquer vos propositions d'amélioration et de correction.
-
-## Acronymes
-
-* IG : Implementation Guide
-* FHIR : Fast Healthcare Interoperability Resources
-* HL7 : Health Level Seven
-
-[A COMPLETER : acronymes utilisés dans le cadre de ce projet]
+Based on [ansforge/IG-modele](https://github.com/ansforge/IG-modele).
