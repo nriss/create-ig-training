@@ -1,6 +1,6 @@
 # Documentation about this page: https://fshschool.org/docs/sushi/configuration/
 
-id: ans.fhir.fr.[code]
+id: org.fhir.[realm:uv|fr|...].[code]
 canonical: https://example.org/ig/[code] # the last part of canonical and id must be the same
 name: ExampleIG # Should be an acronym
 title: IG Example
