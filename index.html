@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en" data-ui="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Training : créer un IG FHIR</title>
+  <title>Training: create a FHIR IG</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -76,10 +76,190 @@
     @media (max-width: 480px) {
       .timeline li { grid-template-columns: 1fr; gap: 2px; }
     }
+    [data-lang] { display: none; }
+    html[data-ui="en"] [data-lang="en"],
+    html[data-ui="fr"] [data-lang="fr"] { display: block; }
+    main { position: relative; }
+    .lang-toggle { position: absolute; top: 16px; right: 16px; display: flex; }
+    .lang-toggle button {
+      font: inherit;
+      font-size: .85rem;
+      padding: 2px 10px;
+      color: var(--fg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .lang-toggle button:first-child { border-radius: 6px 0 0 6px; }
+    .lang-toggle button:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
+    .lang-toggle button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   </style>
 </head>
 <body>
   <main>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-set="en" aria-pressed="true">EN</button>
+      <button type="button" data-set="fr" aria-pressed="false">FR</button>
+    </div>
+
+    <div data-lang="en" lang="en">
+    <h1>Training: create a FHIR IG</h1>
+    <p class="lead">1-hour session: build an implementation guide from scratch with a few FHIR artifacts (profile, extension, value set, example).</p>
+    <p><strong>Date:</strong> Thursday 19 November<br><strong>Time:</strong> 11:00 – 12:30<br><strong>Room:</strong> Malagueta 70</p>
+
+    <h2>Objectives</h2>
+    <ul>
+      <li>Understand the role and structure of an implementation guide, of SUSHI and of the IG Publisher.</li>
+      <li>Generate the IG with the HL7 autobuild tool.</li>
+      <li>Write a small set of FHIR artifacts in FSH.</li>
+    </ul>
+
+    <h2>Prerequisites</h2>
+    <p>A GitHub account. Everything else is done on GitHub.</p>
+
+    <h2>Part 1: Introduction and context</h2>
+    <h3>What is an implementation guide?</h3>
+    <p>An implementation guide (IG) explains how to use FHIR for a specific need. It contains two things:</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Technical resources</h3>
+        <p>Profiles, extensions, value sets, examples… They make it possible to automatically validate the conformance of the exchanged resources.</p>
+      </div>
+      <div class="card">
+        <h3>A narrative part</h3>
+        <p>Pages explaining how to use the defined profiles: context, use cases, implementation rules.</p>
+      </div>
+    </div>
+
+    <h3>Why is it important?</h3>
+    <p>FHIR is very generic by default: to gain interoperability, it must be constrained and specified.</p>
+    <ul>
+      <li>
+        For example, HL7 France added the French constraints in the
+        <a href="https://hl7.fr/ig/fhir/core/">FR Core</a> guide, which itself inherits from the European guide
+        <a href="https://hl7.eu/fhir/base/">HL7 Europe Base and Core</a>.
+      </li>
+      <li>
+        Another example: the Annuaire Santé project (French healthcare professionals published on a FHIR API) has its own implementation guide,
+        <a href="https://interop.esante.gouv.fr/ig/fhir/annuaire/">Annuaire Santé</a>,
+        which explains precisely how the API works and which resources and search parameters are supported.
+      </li>
+    </ul>
+
+    <h3>What is FSH?</h3>
+    <p>
+      FHIR Shorthand (FSH) is a text language used to write the technical resources of an IG concisely, instead of manually editing long JSON or XML files.
+      The <a href="https://github.com/FHIR/sushi">SUSHI</a> tool then compiles the FSH into FHIR resources.
+    </p>
+<pre><code>Profile: TrainingPatient
+Parent: Patient
+* birthDate 1..1</code></pre>
+
+    <h2>Part 2: Creating and initializing the implementation guide</h2>
+    <p>
+      We are going to create your first implementation guide. It will define FHIR profiles that inherit from the
+      <a href="https://hl7.eu/fhir/base/">European profiles</a> and are conformant to them.
+    </p>
+
+    <h3>Step 1: configure the id and the canonical</h3>
+    <p>
+      Once your fork is created, open the <code>sushi-config.yaml</code> file and set these two values:
+    </p>
+    <ul>
+      <li><code>id</code>: the identifier of your implementation guide once published, in the form <code>org.fhir.[realm].[code]</code>.</li>
+      <li><code>canonical</code>: the publication address of the IG. Make up an address.</li>
+    </ul>
+    <p>
+      The <strong>realm</strong> is the geographical or jurisdictional scope of the IG, following the HL7 naming convention:
+      <code>uv</code> (universal), <code>eu</code> (Europe), <code>fr</code> (France), <code>us</code> (United States), etc.
+      Replace <code>[realm:uv|fr|...]</code> with the value that suits you, for example <code>eu</code> for an IG intended to be used in Europe.
+    </p>
+    <p>The only important point: the <code>canonical</code> address must end with <code>/[code]</code>, where <code>[code]</code> is the last part of the <code>id</code>.</p>
+<pre><code>id: org.fhir.eu.monig
+canonical: https://example.org/ig/monig</code></pre>
+    <p>
+      Also edit the <code>ig.ini</code> file: the <code>ig</code> line must point to the IG file generated from your <code>id</code>.
+    </p>
+<pre><code>ig = fsh-generated/resources/ImplementationGuide-org.fhir.eu.monig.json</code></pre>
+
+    <h2>Part 3: Configuring the auto-builder</h2>
+    <p>
+      The HL7 <a href="https://github.com/FHIR/auto-ig-builder">auto-builder</a> automatically generates your IG on every commit.
+    </p>
+    <ol>
+      <li>Check that your fork is a <strong>public</strong> repository.</li>
+      <li>Install the <a href="https://github.com/apps/fhir-ig-builder">FHIR IG Builder</a> GitHub app on your account or on your repository.</li>
+      <li>Make a commit: the generation is triggered and takes 2 to 3 minutes.</li>
+    </ol>
+    <p>
+      Your IG is then available at <code>https://build.fhir.org/ig/&lt;account&gt;/&lt;repository&gt;/branches/&lt;branch&gt;</code>.
+      In case of error, the generation logs are published in the same place: find your repository in the list at
+      <a href="https://build.fhir.org/ig/">build.fhir.org/ig/</a> to see the errors.
+      Branch names may only contain letters, digits, <code>_</code> and <code>-</code> (no <code>/</code>).
+    </p>
+
+    <div class="note">
+      <p>
+        <strong>Note:</strong> it is also possible to generate the IG locally with the IG Publisher, but we will not cover it in this session,
+        because it requires installing too many dependencies: Java, Node.js and SUSHI, Ruby and Jekyll, as well as Git.
+      </p>
+    </div>
+
+    <h2>Part 4: Adding FHIR artifacts</h2>
+    <p>
+      We will now enrich your implementation guide with FHIR artifacts written in FSH in the <code>input/fsh</code> folder:
+      a profile that inherits from the <a href="https://hl7.eu/fhir/base/">European profiles</a>, and the resources associated with it.
+    </p>
+    <h3>Step 1: add the dependency on HL7 Europe Base and Core</h3>
+    <p>
+      To be able to inherit from the European profiles, first add the dependency on the
+      <a href="https://hl7.eu/fhir/base/">HL7 Europe Base and Core</a> guide in <code>sushi-config.yaml</code>
+      (<a href="https://fshschool.org/docs/sushi/configuration/">documentation</a>):
+    </p>
+<pre><code>dependencies:
+  hl7.fhir.eu.base: 2.0.1</code></pre>
+    <h3>Step 2: create the resources</h3>
+    <p>You are going to create 4 resources:</p>
+    <ol>
+      <li>An <strong>Observation profile</strong> to indicate eye color.</li>
+      <li>A <strong>CodeSystem</strong> containing colors.</li>
+      <li>A <strong>ValueSet</strong> containing colors.</li>
+      <li>An <strong>example instance</strong> of this profile.</li>
+    </ol>
+    <p>
+      The <a href="https://build.fhir.org/ig/HL7/fhir-shorthand/reference.html#defining-profiles">FSH reference</a>
+      contains examples to help you.
+    </p>
+
+    <h2>Part 5: Publishing an official version</h2>
+    <p>
+      The "build" version generated by the autobuild is a continuous integration version.
+      To publish an official version, you need to use the <code>-go-publish</code> option of the IG Publisher, which is not covered in this training.
+      See the <a href="https://confluence.hl7.org/spaces/FHIR/pages/35718627/IG+Publisher+Documentation">IG Publisher documentation</a>.
+    </p>
+
+    <h2>Resources</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><a href="https://build.fhir.org/ig/HL7/fhir-shorthand">FHIR Shorthand</a></h3>
+        <p>Grammar and reference of the FSH language.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/FHIR/sushi">SUSHI</a></h3>
+        <p>Compiler from FSH to FHIR resources.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/HL7/fhir-ig-publisher">IG Publisher</a></h3>
+        <p>Generation of the implementation guide website.</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://build.fhir.org/ig/FHIR/ig-guidance">IG guidance</a></h3>
+        <p>Best practices for writing an IG.</p>
+      </div>
+    </div>
+    </div>
+
+    <div data-lang="fr" lang="fr">
     <h1>Training : créer un IG FHIR</h1>
     <p class="lead">Session d'1 heure : construire un implementation guide de A à Z avec quelques artifacts FHIR (profil, extension, jeu de valeurs, exemple).</p>
     <p><strong>Date :</strong> jeudi 19 novembre<br><strong>Heure :</strong> 11h – 12h30<br><strong>Salle :</strong> Malagueta 70</p>
@@ -234,6 +414,34 @@ canonical: https://example.org/ig/monig</code></pre>
         <p>Bonnes pratiques de rédaction d'un IG.</p>
       </div>
     </div>
+    </div>
   </main>
+  <script>
+    (function () {
+      var titles = { en: 'Training: create a FHIR IG', fr: 'Training : créer un IG FHIR' };
+      function apply(lang) {
+        var root = document.documentElement;
+        root.setAttribute('data-ui', lang);
+        root.setAttribute('lang', lang);
+        document.title = titles[lang];
+        document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === lang));
+        });
+      }
+      var lang = 'en';
+      try {
+        var saved = localStorage.getItem('lang');
+        if (saved === 'fr' || saved === 'en') lang = saved;
+      } catch (e) {}
+      apply(lang);
+      document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var l = b.getAttribute('data-set');
+          apply(l);
+          try { localStorage.setItem('lang', l); } catch (e) {}
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
